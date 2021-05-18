@@ -7,24 +7,32 @@ public class Administracion{
     }
 
     public String registrar(int nota){
-        String respuesta = "nota no registrada, lista llena";
-
-        if(contador < notas.length){
-            notas[contador] = nota;
-            contador++;
-            respuesta = "nota registrada, aun puede registrar " + (notas.length - contador);
+        String respuesta = "nota no registrada";
+        
+        if(nota >= 0 && nota <=100){
+            respuesta = respuesta + ", lista llena";
+            if(contador < notas.length){
+                notas[contador] = nota;
+                contador++;
+                respuesta = "nota registrada, aun puede registrar " + (notas.length - contador);
+            }
+        }else{
+            respuesta = respuesta + ", la nota debe estar en el rango '0-100'";
         }
-
-            return respuesta;
+        
+        return respuesta;
     }
 
     public double promedio(){
         double promedio;
         double sumatoria = 0;
+        
         for(int i= 0; i < contador; i++){
             sumatoria = sumatoria + notas[i];
         }
+        
         promedio = sumatoria / contador;
+        
         return promedio;
     }
 
@@ -39,6 +47,7 @@ public class Administracion{
                 aux++;
             }
         }
+        
         promedio = sumatoria / aux;
 
         return promedio;
@@ -69,6 +78,7 @@ public class Administracion{
 
     public double notaMax(){
         double maximo = notas[0];
+
         for(int i = 1; i<contador; i++){
             if(maximo<notas[i]){
                 maximo = notas[i];
